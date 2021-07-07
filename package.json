@@ -1,0 +1,19 @@
+{
+  "name": "mind_game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/rajat-saxena-16/memory_game.git"
+  },
+  "author": "rajat saxena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/rajat-saxena-16/memory_game/issues"
+  },
+  "homepage": "https://gitlab.com/rajat-saxena-16/memory_game#readme"
+}
