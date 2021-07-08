@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start":"http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://gitlab.com/rajat-saxena-16/memory_game/issues"
   },
-  "homepage": "https://gitlab.com/rajat-saxena-16/memory_game#readme"
+  "homepage": "https://gitlab.com/rajat-saxena-16/memory_game#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
 }

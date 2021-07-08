@@ -1,5 +1,19 @@
 const gameContainer = document.getElementById("game");
 
+const startButton = document.getElementById("startButton");
+const restartButton = document.getElementById("restartButton");
+const moves = document.getElementById("moves")
+
+startButton.addEventListener("click", () => {
+  startButton.style.display = "none";
+  restartButton.style.display = "block";
+  gameContainer.style.display = "block";
+})
+/*
+restartButton.addEventListener("click",()=>{
+
+})*/
+
 const COLORS = [
   "red",
   "blue",
@@ -61,12 +75,12 @@ function createDivsForColors(selectedColorArray) {
   }
 }
 
+
+//comparing cards here and incrmenting winning number
 let numberOfWins = 0;
 function compareCards([firstCard, secondCard]) {
 
-
   if ((firstCard.classList[0] === secondCard.classList[0]) && (firstCard.id !== secondCard.id)) {
-    numberOfWins++;
     return true;
   } else {
     return false;
@@ -76,39 +90,51 @@ function compareCards([firstCard, secondCard]) {
 
 
 
-let count = 0, selectedColorArray = [], finishGame = [], lockBoard = false;
+let count = 0, selectedColorArray = [], finishGame = [], lockBoard = false, numberOfMoves = 0;
+
 // TODO: Implement this function!
 function handleCardClick(event) {
+
 
   if (lockBoard) {
     console.log(lockBoard)
     return;
   }
-  console.log(document.querySelector("main"), "INEDD THIS")
 
   // you can use event.target to see which element was clicked
   count++;
-
   console.log("you clicked", event.target, count);
 
+
   if (count <= 2) {
+    numberOfMoves++;
+    moves.textContent = numberOfMoves;
+
     let colorClicked = event.target.classList[0];
+
     event.target.style.backgroundColor = colorClicked;
+
     selectedColorArray.push(event.target)
   }
 
   if (count === 2) {
 
+
+    moves.textContent = numberOfMoves;
+
     let isMatched = compareCards(selectedColorArray);
 
     if (isMatched === true) {
+
+      numberOfMoves++;
+
       let totalNumberOfColors = COLORS.length / 2;
 
       if (numberOfWins === totalNumberOfColors) {
 
         selectedColorArray.forEach(item => {
           item.removeEventListener("click", handleCardClick);
-        })
+        });
 
 
         setTimeout(() => {
@@ -121,8 +147,7 @@ function handleCardClick(event) {
         console.log(s, "from inside remove event listener function");
 
         s.removeEventListener("click", handleCardClick);
-      }
-      )
+      })
 
       console.log("cards MATCHED");
 
@@ -141,7 +166,10 @@ function handleCardClick(event) {
     count = 0;
     selectedColorArray = [];
   }
+
   console.log(document.querySelector("div"), "hello form other side")
+
+
 }
 
 
