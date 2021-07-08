@@ -41,13 +41,17 @@ let shuffledColors = shuffle(COLORS);
 // this function loops over the array of colors
 // it creates a new div and gives it a class with the value of the color
 // it also adds an event listener for a click for each card
-function createDivsForColors(colorArray) {
-  for (let color of colorArray) {
+function createDivsForColors(selectedColorArray) {
+  let id = 1;
+  for (let color of selectedColorArray) {
     // create a new div
     const newDiv = document.createElement("div");
 
     // give it a class attribute for the value we are looping over
     newDiv.classList.add(color);
+    newDiv.id = id;
+    id++;
+
 
     // call a function handleCardClick when a div is clicked on
     newDiv.addEventListener("click", handleCardClick);
@@ -57,62 +61,90 @@ function createDivsForColors(colorArray) {
   }
 }
 
+let numberOfWins = 0;
+function compareCards([firstCard, secondCard]) {
 
-function compareCards([a, b]) {
-  return a.classList[0] === b.classList[0];
+
+  if ((firstCard.classList[0] === secondCard.classList[0]) && (firstCard.id !== secondCard.id)) {
+    numberOfWins++;
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 
 
-
-let count = 0, colorArray = [];
+let count = 0, selectedColorArray = [], finishGame = [], lockBoard = false;
 // TODO: Implement this function!
 function handleCardClick(event) {
+
+  if (lockBoard) {
+    console.log(lockBoard)
+    return;
+  }
+  console.log(document.querySelector("main"), "INEDD THIS")
+
   // you can use event.target to see which element was clicked
   count++;
 
   console.log("you clicked", event.target, count);
 
-
   if (count <= 2) {
     let colorClicked = event.target.classList[0];
     event.target.style.backgroundColor = colorClicked;
-    colorArray.push(event.target)
+    selectedColorArray.push(event.target)
   }
 
   if (count === 2) {
-    console.log(this);
 
-    console.log(colorArray);
+    let isMatched = compareCards(selectedColorArray);
 
-    if (compareCards(colorArray) === true) {
+    if (isMatched === true) {
+      let totalNumberOfColors = COLORS.length / 2;
 
-      colorArray.forEach(s => {
+      if (numberOfWins === totalNumberOfColors) {
 
-        s.removeEventListener("click", function () {
-          alert('You just clicked on a button!');
-        });
+        selectedColorArray.forEach(item => {
+          item.removeEventListener("click", handleCardClick);
+        })
 
+
+        setTimeout(() => {
+          alert("Game won", location.reload());
+        }, 500);
+
+      }
+
+      selectedColorArray.forEach(s => {
+        console.log(s, "from inside remove event listener function");
+
+        s.removeEventListener("click", handleCardClick);
       }
       )
 
       console.log("cards MATCHED");
+
     } else {
-      colorArray.forEach(s => {
+      lockBoard = true;
+      selectedColorArray.forEach(s => {
 
         setTimeout(() => {
           s.style.backgroundColor = "white";
-        }, 1000)
+          lockBoard = false;
+        }, 1000);
 
-      }
-      )
+      });
 
     }
     count = 0;
-    colorArray = [];
+    selectedColorArray = [];
   }
-
+  console.log(document.querySelector("div"), "hello form other side")
 }
+
+
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
