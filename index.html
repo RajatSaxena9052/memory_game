@@ -9,17 +9,29 @@
 
 <body>
   <section id="main">
-    <h1>Memory Game!</h1>
-    <button id="startButton">START</button>
-    <button id="restartButton">RESTART</button>
-    <h2 id="moves">
-      <lable>moves</lable>
-      0
-    </h2>
-    <h2 id="score">
-      <lable>score</lable>
-      0
-    </h2>
+    <h1 id="mem">Memory Game</h1>
+    <h2 id="select">Select Level</h2>
+
+    <div id="submenu">
+      <button id="homeButton" class="smallButton">HOME</button>
+      <button id="restartButton" class="smallButton">RESTART</button>
+    </div>
+
+    <button id="easyButton" class="button">Easy</button>
+    <button id="mediumButton" class="button">Medium</button>
+    <button id="hardButton" class="button">Hard</button>
+
+    <div id="menu">
+      <h2 id="mv">
+        Moves :
+        <span id="moves">0</span>
+      </h2>
+      <h2 id="sc">
+        Score :
+        <span id="score">0</span>
+      </h2>
+    </div>
+
     <div id="game"></div>
   </section>
 

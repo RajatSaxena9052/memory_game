@@ -1,29 +1,144 @@
+@font-face {
+  font-family: memory;
+  src: url(/american-kestrel-font/AmericanKestrelGradient-YZ3O.otf);
+}
+@font-face {
+  font-family: select;
+  src: url(/american-kestrel-font/AmericanKestrelStraightGrad-vz3E.otf);
+}
+
+
+#submenu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#mem{
+  font-family:memory;
+  font-size: 84px;
+  color: #fff;
+  align-self: center;
+}
+#select{
+  font-family: select;
+  font-weight: bold;
+  color: #fff;
+}
+body{
+  background-image:url("./marvel/alexander-andrews-eNoeWZkO7Zc-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 #main{
   display: flex;
   flex-direction: column;
+  background-image:url("./marvel/alexander-andrews-eNoeWZkO7Zc-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
-#main h1{
+
+#menu h1,h2{
   align-self: center;
+  color: white;
+  font-weight: bold;
 }
 
-#restartButton{
+#homeButton,#restartButton,#mv,#sc{
   display: none;
+  color: aliceblue;
 }
 
 #game{
   width:640px;
   height: 640px;
   align-self: center;
-  display: none;
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #game div {
   justify-content: center;
   border: 1px solid black;
-  width: 25%;
+  width: 19%;
   height: 20%;
   margin: 10px;
   display: inline-block;
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
+  background-position: center;
+  object-fit: scale-down;
+  background-size: contain;
+  width: 100px;
+  height:100px;
+  
+}
+
+#game div:hover {
+  box-shadow: 0 0 18px rgba(36, 24, 196, 0.418); 
+}
+
+
+.smallButton{
+  margin-top: 0px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 22px;
+  cursor: pointer;
   text-align: center;
-} 
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: rgba(111, 0, 255, 0.349);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  font-size: 14px;
+  font-weight: bold;
+  width: 105px;
+}
+.button {
+  align-self: center;
+  margin-top: 30px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: rgba(47, 0, 255, 0.349);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  width: 640px;
+}
+
+.button:hover { background-color: #28346d }
+.smallButton:hover{  background-color: #28346d }
+
+.button:active {
+  background-color: #2977dfa1;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.smallButton:active{
+  background-color: #29ff29bd;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
