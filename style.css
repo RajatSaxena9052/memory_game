@@ -131,26 +131,27 @@ body{
   width:640px;
   height: 640px;
   align-self: center;
- 
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 #game div {
   justify-content: center;
   border: 1px solid black;
-  width: 19%;
-  height: 20%;
-  margin: 10px;
+  width: 150px;
+  height: 19%;
+  margin: 10px 15px;
   display: inline-block;
   background-repeat: no-repeat;
   /* background-attachment: fixed; */
   background-position: center;
   object-fit: scale-down;
   background-size: contain;
-  width: 100px;
-  height:100px;
+  align-self: center;
+  /* width: 100px;
+  height:100px; */
   
 }
 

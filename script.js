@@ -7,6 +7,8 @@ const overlay = document.getElementById("overlay");
 const popupButton = document.getElementById("popupButton");
 const gameContainer = document.getElementById("game");
 
+console.log(document.getElementById("game").children);
+
 const mem = document.getElementById("mem");
 const select = document.getElementById("select");
 
@@ -32,6 +34,10 @@ popupButton.addEventListener("click", () => {
 
 
 easyButton.addEventListener("click", () => {
+
+  gameContainer.style.width = "40%";
+  gameContainer.style.maxWidth = "60%";
+
   mem.style.fontSize = "34px";
   let shuffledColors = shuffle(COLORS.slice(0, 4))
   select.style.display = "none";
@@ -48,6 +54,10 @@ easyButton.addEventListener("click", () => {
 })
 
 mediumButton.addEventListener("click", () => {
+
+  gameContainer.style.width = "60%";
+  gameContainer.style.maxWidth = "90%";
+
   select.style.display = "none";
   mem.style.fontSize = "34px";
 
@@ -68,8 +78,11 @@ mediumButton.addEventListener("click", () => {
 hardButton.addEventListener("click", () => {
   select.style.display = "none";
   mem.style.fontSize = "44px";
+  gameContainer.style.width = "100%";
+  gameContainer.style.maxWidth = "90%";
 
-  let shuffledColors = shuffle(COLORS.slice(0, 16));
+
+  let shuffledColors = shuffle(COLORS.slice(0, 18));
 
   createDivsForColors(shuffledColors);
 
@@ -305,7 +318,7 @@ function handleCardClick(event) {
 
         // let SCORE = calculateScore();
         // const your_score = document.getElementById("your_score");
-        your_score.innerText = scores*100;
+        your_score.innerText = scores * 100;
 
       }
 
