@@ -1,16 +1,35 @@
+
+// const home_popupButton = document.getElementById("home_popupButton")
+
+
+const popup = document.getElementById("modal");
+const overlay = document.getElementById("overlay");
+const popupButton = document.getElementById("popupButton");
 const gameContainer = document.getElementById("game");
 
-const mem = document.getElementById("mem")
+const mem = document.getElementById("mem");
 const select = document.getElementById("select");
 
 const homeButton = document.getElementById("homeButton");
-
 const easyButton = document.getElementById("easyButton");
 const mediumButton = document.getElementById("mediumButton");
 const hardButton = document.getElementById("hardButton");
 const restartButton = document.getElementById("restartButton");
+
 const moves = document.getElementById("moves");
 const score = document.getElementById("score");
+
+
+
+popupButton.addEventListener("click", () => {
+  homeButton.click()
+  overlay.style.display = "none";
+  popup.style.display = "none";
+})
+
+// popupButton.addEventListener("click",)
+
+
 
 easyButton.addEventListener("click", () => {
   mem.style.fontSize = "34px";
@@ -50,9 +69,9 @@ hardButton.addEventListener("click", () => {
   select.style.display = "none";
   mem.style.fontSize = "44px";
 
-  let shuffledColors = shuffle(COLORS);
+  let shuffledColors = shuffle(COLORS.slice(0, 16));
 
-  createDivsForColors(shuffledColors.slice(0, 16));
+  createDivsForColors(shuffledColors);
 
   homeButton.style.display = "block";
   easyButton.style.display = "none";
@@ -68,6 +87,7 @@ hardButton.addEventListener("click", () => {
 
 
 homeButton.addEventListener("click", () => {
+
   easyButton.style.display = "block";
   mediumButton.style.display = "block";
   hardButton.style.display = "block";
@@ -75,7 +95,7 @@ homeButton.addEventListener("click", () => {
   gameContainer.style.display = "none";
   moves.style.display = "none";
   score.style.display = "none";
-  location.reload()
+  location.reload();
 
 })
 
@@ -83,7 +103,7 @@ restartButton.addEventListener("click", () => {
 
   restartButton.style.display = "block";
   gameContainer.style.display = "block";
-  location.reload()
+  location.reload();
 
 })
 
@@ -147,6 +167,7 @@ const COLORS = [
 // here is a helper function to shuffle an array
 // it returns the same array with values shuffled
 // it is based on an algorithm called Fisher Yates if you want ot research more
+
 function shuffle(array) {
   let counter = array.length;
 
@@ -172,10 +193,14 @@ function shuffle(array) {
 // this function loops over the array of colors
 // it creates a new div and gives it a class with the value of the color
 // it also adds an event listener for a click for each card
+var numberOfDivs = (a) => {
+  return 0 + a;
+}
+
 function createDivsForColors(selectedColorArray) {
   let id = 1;
+
   for (let color of selectedColorArray) {
-    console.log(selectedColorArray.length);
 
     // create a new div
     const newDiv = document.createElement("div");
@@ -203,22 +228,20 @@ const calculateScore = () => {
   if (numberOfMoves === 10) {
     return 100;
   } else {
-    return 100 - ((numberOfMoves - 10) * 2.5)
+    return 100 - ((numberOfMoves - 10) * 2.5);
   }
-
 }
 
 
 
 
-//comparing cards here and incrmenting winning number
+//comparing two cards here 
 function compareCards([firstCard, secondCard]) {
 
   if ((firstCard.classList[0] === secondCard.classList[0]) && (firstCard.id !== secondCard.id)) {
     return true;
   }
   else if ((firstCard.classList[0] === secondCard.classList[0]) && (firstCard.id == secondCard.id)) {
-
     return undefined;
   }
   else {
@@ -228,12 +251,10 @@ function compareCards([firstCard, secondCard]) {
 }
 
 
-
 let count = 0, selectedColorArray = [], finishGame = [], lockBoard = false, numberOfMoves = 0, scores = 0;
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-
 
   if (lockBoard) {
     console.log(lockBoard)
@@ -242,9 +263,7 @@ function handleCardClick(event) {
 
   // you can use event.target to see which element was clicked
   count++;
-  console.log("you clicked", event.target, count);
-
-  let pre = "";
+  //console.log("you clicked", event.target, count);
 
   if (count <= 2) {
 
@@ -269,31 +288,36 @@ function handleCardClick(event) {
       numberOfMoves += 2;
       moves.textContent = numberOfMoves;
 
+      console.log(numberOfMoves, "total number rof Moves", scores, COLORS, event);
 
-      let totalNumberOfColors = COLORS.length / 2;
+      let totalDivs = document.querySelectorAll("#game div").length
 
-      if (scores === totalNumberOfColors) {
+      /*ending game*/
+      if (scores === totalDivs / 2) {
+        console.log("THIS IS FROM THE LAST PAGE")
 
-        selectedColorArray.forEach(item => {
-          item.removeEventListener("click", handleCardClick);
+        selectedColorArray.forEach(colorDiv => {
+          colorDiv.removeEventListener("click", handleCardClick);
         });
 
-        let SCORE = calculateScore();
-        score.innerText = SCORE;
-        score.style.display = "block";
-        alert("Game won", "your score is:", SCORE);
+        modal.style.display = "block";
+        overlay.style.display = "block";
+
+        // let SCORE = calculateScore();
+        // const your_score = document.getElementById("your_score");
+        your_score.innerText = scores*100;
 
       }
 
       selectedColorArray.forEach(s => {
-        console.log(s, "from inside remove event listener function");
-
         s.removeEventListener("click", handleCardClick);
       })
 
       console.log("cards MATCHED");
 
     } else if (isMatched === undefined) {
+      /*clicking on the same card it doesn't icrease the count*/
+
       selectedColorArray.forEach(s => {
 
         setTimeout(() => {
@@ -308,9 +332,10 @@ function handleCardClick(event) {
     }
     else {
 
+      /*when cards dont match*/
+
       numberOfMoves += 2;
       moves.textContent = numberOfMoves;
-
 
       lockBoard = true;
       selectedColorArray.forEach(s => {
@@ -328,8 +353,7 @@ function handleCardClick(event) {
     selectedColorArray = [];
   }
 
-  console.log(document.querySelector("div"), "hello form other side", moves.textContent)
-
+  //console.log(document.querySelector("div"), "hello form other side", moves.textContent)
 
 }
 
